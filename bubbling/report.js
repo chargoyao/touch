@@ -36,7 +36,13 @@ window.addEventListener('load', function() {
 	'mouseup',
 	'focus',
 	'blur',
-	'click'
+	'click',
+
+	
+	'wheel',
+	'scroll',
+	'DOMMouseScroll'
+
 	];
 	var b = document.getElementById('b');
 	var o = document.getElementById('o'),
