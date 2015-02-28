@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html><head><meta charset=utf-8>
+<title>Event listener</title>
+<meta name="viewport" content="width=device-width">
+<link rel="stylesheet" href="style.css">
+<script src="report.js"></script>
+</head>
+
+<body id="b" style="min-height: 3000px">
+<h1>Scroll the page!</h1>
+<output id="o" style="overflow:auto"></output>
+
+<script>
+window.addEventListener('load', function() {
+	var t = 0;
+	var events = [
+	'MSPointerDown',
+	'MSPointerUp',
+	'MSPointerCancel',
+	'MSPointerMove',
+	'MSPointerOver',
+	'MSPointerOut',
+	'MSPointerEnter',
+	'MSPointerLeave',
+	'MSGotPointerCapture',
+	'MSLostPointerCapture',
+	'pointerdown',
+	'pointerup',
+	'pointercancel',
+	'pointermove',
+	'pointerover',
+	'pointerout',
+	'pointerenter',
+	'pointerleave',
+	'gotpointercapture',
+	'lostpointercapture',
+	'touchstart',
+	'touchmove',
+	'touchend',
+	'touchenter',
+	'touchleave',
+	'touchcancel',
+	'mouseover',
+	// 'mousemove',
+	'mouseout',
+	'mouseenter',
+	'mouseleave',
+	'mousedown',
+	'mouseup',
+	'focus',
+	'blur',
+	'click',
+
+	
+	'wheel',
+	'scroll',
+	'DOMMouseScroll'
+
+	];
+	var b = document.getElementById('b');
+	var o = document.getElementById('o'),
+	report = function(e) {
+		if (e.target == o) { return; } // ignore if we're scrolling the output thing
+		var s = e.type + '<br>';
+		setTimeout(function() { delayedInnerHTML(s) }, 100);
+	}
+
+	/* Hack to work around new iOS8 behavior where innerHTML counts as a content change - previously, it was safe to use, see http://www.quirksmode.org/blog/archives/2014/02/the_ios_event_c.html */
+	delayedInnerHTML = function(s) {
+		o.innerHTML += s;
+	}
+
+	/* attach listeners to the body to test bubbling/event delegation */
+	for (var i=0; i<events.length; i++) {
+		document.addEventListener(events[i], report, false);
+	}
+}, true);
+</script>
+
+</body></html>
+
+
